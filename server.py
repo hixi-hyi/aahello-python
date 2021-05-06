@@ -15,5 +15,11 @@ def root():
     result = MESSAGE.encode("utf-8")
     return result
 
+@app.after_request
+def add_header(response):
+    response.cache_control.max_age = 300
+    return response
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=PORT)
+
